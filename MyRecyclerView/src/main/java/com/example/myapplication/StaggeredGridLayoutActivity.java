@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +10,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class StaggeredGridLayoutActivity extends AppCompatActivity {
     private RecyclerView mRecycleView;
     private List<String> mDatas;
-    private SimpleAdapter mAdapter;
+    private StaggeredAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
         initDatas();
 
         initViews();
-        mAdapter = new SimpleAdapter(this, mDatas);
+        mAdapter = new StaggeredAdapter(this, mDatas);
         mRecycleView.setAdapter(mAdapter);
         //设置RecyclerView的布局管理
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        //LinearLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
         //设置RecyclerView的Item间分割线
         //mRecycleView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
-        mRecycleView.setLayoutManager(linearLayoutManager);
+        mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
     }
 
     private void initDatas() {
@@ -68,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(5,StaggeredGridLayoutManager.HORIZONTAL));
                 break;
             case R.id.action_staggered:
-                Intent intent = new Intent(MainActivity.this,StaggeredGridLayoutActivity.class);
-                startActivity(intent);
+
                 break;
             default:
                 break;
